@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="前言​	Windows 最近出了个新版本24h2，听说更新后会出很多问题一直没有去更新，但是在二月份的时候给我强制更新了（不敢乱动注册表），导致后面国赛半决赛用ai的时候也出了点问题，docker和wsl有点寄了。 ​	对于重装系统达人来说这种情况直接重装就完事了。由于我是电脑小白，23年刚买这个电脑不过只会玩游戏罢了，最近在学习安全的路上才开始了解一些东西，所以也一直没有去重装过，一直在使用这个">
+    <meta name="description" content="前言​	Windows 最近出了个新版本 24h2，听说更新后会出很多问题一直没有去更新，但是在二月份的时候给我强制更新了（不敢乱动注册表），导致后面国赛半决赛用ai的时候也出了点问题，docker 和 wsl 有点寄了。 ​	对于重装系统达人来说这种情况直接重装就完事了。由于我是电脑小白，23年刚买这个电脑不过只会玩游戏罢了，最近在学习安全的路上才开始了解一些东西，所以也一直没有去重装过，一直在">
 <meta property="og:type" content="article">
 <meta property="og:title" content="关于win11更新到24h2之后虚拟化的一些问题">
 <meta property="og:url" content="https://mashiro726.github.io/2025/03/28/%E5%85%B3%E4%BA%8E%E6%9B%B4%E6%96%B024h2%E4%B9%8B%E5%90%8E%E8%99%9A%E6%8B%9F%E5%8C%96%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="Mash1r0&#39;Blog">
-<meta property="og:description" content="前言​	Windows 最近出了个新版本24h2，听说更新后会出很多问题一直没有去更新，但是在二月份的时候给我强制更新了（不敢乱动注册表），导致后面国赛半决赛用ai的时候也出了点问题，docker和wsl有点寄了。 ​	对于重装系统达人来说这种情况直接重装就完事了。由于我是电脑小白，23年刚买这个电脑不过只会玩游戏罢了，最近在学习安全的路上才开始了解一些东西，所以也一直没有去重装过，一直在使用这个">
+<meta property="og:description" content="前言​	Windows 最近出了个新版本 24h2，听说更新后会出很多问题一直没有去更新，但是在二月份的时候给我强制更新了（不敢乱动注册表），导致后面国赛半决赛用ai的时候也出了点问题，docker 和 wsl 有点寄了。 ​	对于重装系统达人来说这种情况直接重装就完事了。由于我是电脑小白，23年刚买这个电脑不过只会玩游戏罢了，最近在学习安全的路上才开始了解一些东西，所以也一直没有去重装过，一直在">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503281339085.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503281339964.png">
@@ -24,7 +24,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503281340100.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503281340678.png">
 <meta property="article:published_time" content="2025-03-27T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-03-28T05:45:12.025Z">
+<meta property="article:modified_time" content="2025-03-28T05:46:17.814Z">
 <meta property="article:author" content="Mash1r0">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503281339085.png">
@@ -165,7 +165,7 @@
   
 
   <div class="content e-content" itemprop="articleBody">
-    <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>​	Windows 最近出了个新版本24h2，听说更新后会出很多问题一直没有去更新，但是在二月份的时候给我强制更新了（不敢乱动注册表），导致后面国赛半决赛用ai的时候也出了点问题，docker和wsl有点寄了。</p>
+    <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>​	Windows 最近出了个新版本 24h2，听说更新后会出很多问题一直没有去更新，但是在二月份的时候给我强制更新了（不敢乱动注册表），导致后面国赛半决赛用ai的时候也出了点问题，docker 和 wsl 有点寄了。</p>
 <p>​	对于重装系统达人来说这种情况直接重装就完事了。由于我是电脑小白，23年刚买这个电脑不过只会玩游戏罢了，最近在学习安全的路上才开始了解一些东西，所以也一直没有去重装过，一直在使用这个     win11 家庭版（权限够高好像可以不更新？），太多环境什么的也让我不太敢去重装，怕麻烦。然后这两天虚拟化平台给我干掉了，导致我虚拟机都用不了了，kali 又经常需要用，所以今天刚好把这个问题解决了。</p>
 <p><img src="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503281339085.png" alt="image-20250328114932103"></p>
 <h2 id="Hyper-V"><a href="#Hyper-V" class="headerlink" title="Hyper-V"></a>Hyper-V</h2><p>Hyper-V 是一个虚拟化平台。win11 家庭版是没有这个功能的，需要我们手动去安装。我们可以 win+r 然后输入 optionalfeatures 就行了。</p>
