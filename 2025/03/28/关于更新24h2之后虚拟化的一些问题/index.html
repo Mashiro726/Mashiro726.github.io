@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="前言​	Windows 最近出了个新版本24h2，听说更新后会出很多问题一直没有去更新，但是在二月份的时候给我强制更新了（不敢乱动注册表），导致后面国赛半决赛用ai的时候也出了点问题，docker和wsl有点寄了。 ​	对于重装系统达人来说这种情况直接重装就完事了。由于我是电脑小白，23年刚买这个电脑不过只会玩游戏罢了，最近在学习安全的路上才开始了解一些东西，所以也一直没有去重装过，一直在使用这个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于win11更新到24h2之后虚拟化的一些问题">
+<meta property="og:url" content="https://mashiro726.github.io/2025/03/28/%E5%85%B3%E4%BA%8E%E6%9B%B4%E6%96%B024h2%E4%B9%8B%E5%90%8E%E8%99%9A%E6%8B%9F%E5%8C%96%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:site_name" content="Mash1r0&#39;Blog">
+<meta property="og:description" content="前言​	Windows 最近出了个新版本24h2，听说更新后会出很多问题一直没有去更新，但是在二月份的时候给我强制更新了（不敢乱动注册表），导致后面国赛半决赛用ai的时候也出了点问题，docker和wsl有点寄了。 ​	对于重装系统达人来说这种情况直接重装就完事了。由于我是电脑小白，23年刚买这个电脑不过只会玩游戏罢了，最近在学习安全的路上才开始了解一些东西，所以也一直没有去重装过，一直在使用这个">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503281339085.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503281339964.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503281339013.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503281339979.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503281339935.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503281339318.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503281340573.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503281340900.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503281340100.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503281340678.png">
+<meta property="article:published_time" content="2025-03-27T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-03-28T05:40:44.481Z">
+<meta property="article:author" content="Mash1r0">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503281339085.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/2.jpg">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/2.jpg" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/2.jpg">
+        
+      
+    
+    <!-- title -->
+    <title>关于win11更新到24h2之后虚拟化的一些问题</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Articles</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/friends/">Links</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/03/13/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CC%E9%93%BE/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://mashiro726.github.io/2025/03/28/%E5%85%B3%E4%BA%8E%E6%9B%B4%E6%96%B024h2%E4%B9%8B%E5%90%8E%E8%99%9A%E6%8B%9F%E5%8C%96%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://mashiro726.github.io/2025/03/28/%E5%85%B3%E4%BA%8E%E6%9B%B4%E6%96%B024h2%E4%B9%8B%E5%90%8E%E8%99%9A%E6%8B%9F%E5%8C%96%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/&text=关于win11更新到24h2之后虚拟化的一些问题"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://mashiro726.github.io/2025/03/28/%E5%85%B3%E4%BA%8E%E6%9B%B4%E6%96%B024h2%E4%B9%8B%E5%90%8E%E8%99%9A%E6%8B%9F%E5%8C%96%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/&title=关于win11更新到24h2之后虚拟化的一些问题"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://mashiro726.github.io/2025/03/28/%E5%85%B3%E4%BA%8E%E6%9B%B4%E6%96%B024h2%E4%B9%8B%E5%90%8E%E8%99%9A%E6%8B%9F%E5%8C%96%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/&is_video=false&description=关于win11更新到24h2之后虚拟化的一些问题"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=关于win11更新到24h2之后虚拟化的一些问题&body=Check out this article: https://mashiro726.github.io/2025/03/28/%E5%85%B3%E4%BA%8E%E6%9B%B4%E6%96%B024h2%E4%B9%8B%E5%90%8E%E8%99%9A%E6%8B%9F%E5%8C%96%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://mashiro726.github.io/2025/03/28/%E5%85%B3%E4%BA%8E%E6%9B%B4%E6%96%B024h2%E4%B9%8B%E5%90%8E%E8%99%9A%E6%8B%9F%E5%8C%96%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/&title=关于win11更新到24h2之后虚拟化的一些问题"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://mashiro726.github.io/2025/03/28/%E5%85%B3%E4%BA%8E%E6%9B%B4%E6%96%B024h2%E4%B9%8B%E5%90%8E%E8%99%9A%E6%8B%9F%E5%8C%96%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/&title=关于win11更新到24h2之后虚拟化的一些问题"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://mashiro726.github.io/2025/03/28/%E5%85%B3%E4%BA%8E%E6%9B%B4%E6%96%B024h2%E4%B9%8B%E5%90%8E%E8%99%9A%E6%8B%9F%E5%8C%96%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/&title=关于win11更新到24h2之后虚拟化的一些问题"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://mashiro726.github.io/2025/03/28/%E5%85%B3%E4%BA%8E%E6%9B%B4%E6%96%B024h2%E4%B9%8B%E5%90%8E%E8%99%9A%E6%8B%9F%E5%8C%96%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/&title=关于win11更新到24h2之后虚拟化的一些问题"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://mashiro726.github.io/2025/03/28/%E5%85%B3%E4%BA%8E%E6%9B%B4%E6%96%B024h2%E4%B9%8B%E5%90%8E%E8%99%9A%E6%8B%9F%E5%8C%96%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/&name=关于win11更新到24h2之后虚拟化的一些问题&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://mashiro726.github.io/2025/03/28/%E5%85%B3%E4%BA%8E%E6%9B%B4%E6%96%B024h2%E4%B9%8B%E5%90%8E%E8%99%9A%E6%8B%9F%E5%8C%96%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/&t=关于win11更新到24h2之后虚拟化的一些问题"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hyper-V"><span class="toc-number">2.</span> <span class="toc-text">Hyper-V</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Virtual-Machine-Platform"><span class="toc-number">3.</span> <span class="toc-text">Virtual Machine Platform</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">4.</span> <span class="toc-text">总结</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        关于win11更新到24h2之后虚拟化的一些问题
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Mash1r0</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-03-27T16:00:00.000Z" class="dt-published" itemprop="datePublished">2025-03-28</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>​	Windows 最近出了个新版本24h2，听说更新后会出很多问题一直没有去更新，但是在二月份的时候给我强制更新了（不敢乱动注册表），导致后面国赛半决赛用ai的时候也出了点问题，docker和wsl有点寄了。</p>
+<p>​	对于重装系统达人来说这种情况直接重装就完事了。由于我是电脑小白，23年刚买这个电脑不过只会玩游戏罢了，最近在学习安全的路上才开始了解一些东西，所以也一直没有去重装过，一直在使用这个     win11 家庭版，太多环境什么的也让我不太敢去重装，怕麻烦。然后这两天虚拟化平台给我干掉了，导致我虚拟机都用不了了，kali 又经常需要用，所以今天刚好把这个问题解决了。</p>
+<p><img src="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503281339085.png" alt="image-20250328114932103"></p>
+<h2 id="Hyper-V"><a href="#Hyper-V" class="headerlink" title="Hyper-V"></a>Hyper-V</h2><p>Hyper-V 是一个虚拟化平台。win11 家庭版是没有这个功能的，需要我们手动去安装。我们可以 win+r 然后输入 optionalfeatures 就行了。</p>
+<p>去找找看。</p>
+<p><img src="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503281339964.png" alt="image-20250328114829607"></p>
+<p>应该是找不到这个选项的，我们在桌面准备一个 .cmd 或者 .bat 文件，然后在里面输入以下内容：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">pushd</span> &quot;%~dp0&quot;</span><br><span class="line"><span class="built_in">dir</span> /b <span class="variable">%SystemRoot%</span>\servicing\Packages\*Hyper-V*.mum &gt;hyper-v.txt</span><br><span class="line"><span class="keyword">for</span> /f <span class="variable">%%i</span> <span class="keyword">in</span> (&#x27;<span class="built_in">findstr</span> /i . hyper-v.txt <span class="number">2</span>^&gt;<span class="built_in">nul</span>&#x27;) <span class="keyword">do</span> dism /online /norestart /add-package:&quot;<span class="variable">%SystemRoot%</span>\servicing\Packages\<span class="variable">%%i</span>&quot;</span><br><span class="line"><span class="built_in">del</span> hyper-v.txt</span><br><span class="line">Dism /online /enable-feature /featurename:Microsoft-Hyper-V -All /LimitAccess /ALL</span><br><span class="line"><span class="built_in">pause</span></span><br></pre></td></tr></table></figure>
+
+<p>然后管理员去运行就行了，我这里很久之前就解决了，贴一张别人的图。</p>
+<p><img src="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503281339013.png" alt="image-20250328115358097"></p>
+<p>它会去自己下载一些包，然后重启之后就会有了。</p>
+<p>然后可能会出现一些小问题，我把它全部弄成自动了，不知道有没有用，谨慎使用吧。</p>
+<p>win+r 然后输入 services.msc 打开服务找到所有有关 Hyper-V 的服务，并全部设置为自动。</p>
+<p><img src="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503281339979.png" alt="image-20250328132553543"></p>
+<h2 id="Virtual-Machine-Platform"><a href="#Virtual-Machine-Platform" class="headerlink" title="Virtual Machine Platform"></a>Virtual Machine Platform</h2><p>我在解决完 Hyper-V 之后又出现了 Virtual Machine Platform 的问题，这也是一个虚拟化平台，我并没有去深究它和前面的 Hyper-V 有什么区别，前面的没了只是 docker 会出问题 VMware 是不受影响的，这个都会影响。</p>
+<p>我们继续打开 Windows 功能的界面，它可能是经过翻译之后的1虚拟化平台。</p>
+<p><img src="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503281339935.png" alt="1743065782286_ECBF41BC-A957-44dc-9103-0D691A50DA5C"></p>
+<p>然后勾上确定，之后它会有下载和搜索本地文件，如果能够成功下载那就没啥问题了。</p>
+<p>如果不行，我们可以再来弄些东西尝试下载。我们还是 win+r 然后输入 services.msc 打开服务。</p>
+<p><img src="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503281339318.png" alt="image-20250328132632541"></p>
+<p>找到 Windows install 和 Windows更新 的两个服务，并启动，然后命令行运行 sfc &#x2F;scannow 。它是用于扫描和修复系统文件的完整性问题。</p>
+<p><img src="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503281340573.png" alt="image-20250328132915495"></p>
+<p>然后重启一下，再尝试在功能页面给它启动。</p>
+<p><img src="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503281340900.png" alt="image-20250328133301660"></p>
+<p>还是不行的话，可以尝试用管理员运行 powershell 然后输入以下命令：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Enable-WindowsOptionalFeature</span> <span class="literal">-Online</span> <span class="literal">-FeatureName</span> VirtualMachinePlatform</span><br></pre></td></tr></table></figure>
+
+<p>我是在这一步解决的，但是可能需要等很久。</p>
+<p><img src="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503281340100.png" alt="image-20250328133333389"></p>
+<p>完成之后它自己就开启了，我们的虚拟机和 docker 也就可以正常使用了。</p>
+<p>最后一个办法就是继续更新吧，它还有一些补丁什么的，但是我会更新失败。</p>
+<p><img src="https://raw.githubusercontent.com/Mashiro726/mash1r0img/main/jpg/202503281340678.png" alt="image-20250328133455837"></p>
+<p>实在不行就只能重装。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>上面的步骤全是瞎折腾，只要能解决就行了。我是不太想重装系统的，但也只是暂时能逃避了，重装是迟早的事。</p>
+<p>参考链接：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/york1996/article/details/145748167">https://blog.csdn.net/york1996/article/details/145748167</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_40572611/article/details/144030642">https://blog.csdn.net/weixin_40572611/article/details/144030642</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/winkexin/article/details/131526991">https://blog.csdn.net/winkexin/article/details/131526991</a></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/archives/">Articles</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/friends/">Links</a></li>
+        
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hyper-V"><span class="toc-number">2.</span> <span class="toc-text">Hyper-V</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Virtual-Machine-Platform"><span class="toc-number">3.</span> <span class="toc-text">Virtual Machine Platform</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">4.</span> <span class="toc-text">总结</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://mashiro726.github.io/2025/03/28/%E5%85%B3%E4%BA%8E%E6%9B%B4%E6%96%B024h2%E4%B9%8B%E5%90%8E%E8%99%9A%E6%8B%9F%E5%8C%96%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://mashiro726.github.io/2025/03/28/%E5%85%B3%E4%BA%8E%E6%9B%B4%E6%96%B024h2%E4%B9%8B%E5%90%8E%E8%99%9A%E6%8B%9F%E5%8C%96%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/&text=关于win11更新到24h2之后虚拟化的一些问题"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://mashiro726.github.io/2025/03/28/%E5%85%B3%E4%BA%8E%E6%9B%B4%E6%96%B024h2%E4%B9%8B%E5%90%8E%E8%99%9A%E6%8B%9F%E5%8C%96%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/&title=关于win11更新到24h2之后虚拟化的一些问题"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://mashiro726.github.io/2025/03/28/%E5%85%B3%E4%BA%8E%E6%9B%B4%E6%96%B024h2%E4%B9%8B%E5%90%8E%E8%99%9A%E6%8B%9F%E5%8C%96%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/&is_video=false&description=关于win11更新到24h2之后虚拟化的一些问题"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=关于win11更新到24h2之后虚拟化的一些问题&body=Check out this article: https://mashiro726.github.io/2025/03/28/%E5%85%B3%E4%BA%8E%E6%9B%B4%E6%96%B024h2%E4%B9%8B%E5%90%8E%E8%99%9A%E6%8B%9F%E5%8C%96%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://mashiro726.github.io/2025/03/28/%E5%85%B3%E4%BA%8E%E6%9B%B4%E6%96%B024h2%E4%B9%8B%E5%90%8E%E8%99%9A%E6%8B%9F%E5%8C%96%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/&title=关于win11更新到24h2之后虚拟化的一些问题"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://mashiro726.github.io/2025/03/28/%E5%85%B3%E4%BA%8E%E6%9B%B4%E6%96%B024h2%E4%B9%8B%E5%90%8E%E8%99%9A%E6%8B%9F%E5%8C%96%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/&title=关于win11更新到24h2之后虚拟化的一些问题"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://mashiro726.github.io/2025/03/28/%E5%85%B3%E4%BA%8E%E6%9B%B4%E6%96%B024h2%E4%B9%8B%E5%90%8E%E8%99%9A%E6%8B%9F%E5%8C%96%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/&title=关于win11更新到24h2之后虚拟化的一些问题"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://mashiro726.github.io/2025/03/28/%E5%85%B3%E4%BA%8E%E6%9B%B4%E6%96%B024h2%E4%B9%8B%E5%90%8E%E8%99%9A%E6%8B%9F%E5%8C%96%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/&title=关于win11更新到24h2之后虚拟化的一些问题"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://mashiro726.github.io/2025/03/28/%E5%85%B3%E4%BA%8E%E6%9B%B4%E6%96%B024h2%E4%B9%8B%E5%90%8E%E8%99%9A%E6%8B%9F%E5%8C%96%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/&name=关于win11更新到24h2之后虚拟化的一些问题&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://mashiro726.github.io/2025/03/28/%E5%85%B3%E4%BA%8E%E6%9B%B4%E6%96%B024h2%E4%B9%8B%E5%90%8E%E8%99%9A%E6%8B%9F%E5%8C%96%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/&t=关于win11更新到24h2之后虚拟化的一些问题"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2025
+    Mash1r0
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Articles</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/friends/">Links</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+ 
+  <link
+    rel="preload"
+    href="/lib/font-awesome/css/all.min.css"
+    as="style"
+    onload="this.onload=null;this.rel='stylesheet'"
+  />
+  <noscript
+    ><link
+      rel="stylesheet"
+      href="/lib/font-awesome/css/all.min.css"
+  /></noscript>
+
+
+    <!-- jquery -->
+
+  
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+
+
+
+<!-- clipboard -->
+
+  
+    
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
